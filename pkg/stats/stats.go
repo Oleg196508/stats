@@ -1,16 +1,17 @@
 package stats
 
 import 
-"github.com/Oleg196508/bank/pkg/types"
+"github.com/Oleg196508/bank/v2/pkg/types"
 
 //Avg рассчитывает среднюю сумму платежа
 func Avg(payments []types.Payment) types.Money {
     sum := types.Money(0)
 	number := 0
 	for _, payment := range payments {
-		number++
-		sum += payment.Amount
-	    
+		if payment.Status != "FAIL" {
+			number++
+			sum += payment.Amount	
+		}   
 	}
 	avgsum := sum / types.Money(number)
 
@@ -24,7 +25,7 @@ func TotalInCategory(payments []types.Payment, category types.Category)types.Mon
 	number := 0
 
 	for _, payment := range payments {
-		if payment.Category == category {
+		if payment.Category == category && payment.Status != "FAIL" {
 			number++
 			sum += payment.Amount
 		}	
