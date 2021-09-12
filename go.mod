@@ -1,4 +1,4 @@
-module github.com/Oleg196508/stats
+module github.com/Oleg196508/stats/v2
 
 go 1.17
 
